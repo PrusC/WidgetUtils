@@ -29,7 +29,7 @@ class SliderSpinBoxWidget(QWidget):
 
         self.setMinimum(self._slider.minimum())
         self.setMaximum(self._slider.maximum())
-
+        self._spinBox.setSingleStep(self._slider.getRange()/10.0)
         self._connect()
 
     def _connect(self):
@@ -45,11 +45,13 @@ class SliderSpinBoxWidget(QWidget):
         self._slider.setMinimum(value)
         self._spinBox.setMinimum(value)
         self._labelMinValue.setText(str(value))
+        self._spinBox.setSingleStep(self._slider.getRange()/10.0)
 
     def setMaximum(self, value):
         self._slider.setMaximum(value)
         self._spinBox.setMaximum(value)
         self._labelMaxValue.setText(str(value))
+        self._spinBox.setSingleStep(self._slider.getRange()/10.0)
 
     def setTittle(self, value):
         self._labelTittle.setText(value)

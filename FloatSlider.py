@@ -48,3 +48,6 @@ class FloatSlider(QSlider):
     def setFactor(self, value):
         self._max_int_value = value
         self.setValue(self.value())
+
+    def getRange(self):
+        return self._range
