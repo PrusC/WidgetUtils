@@ -1,24 +1,30 @@
+#
+# @File: slider.py
+#
+# Author: Konstantin Prusakov <konstatnin.prusakov@phystech.edu>
+#
+
 from PySide2.QtWidgets import QSlider
-from PySide2.QtCore import Signal as pyqtSignal
-from PySide2.QtCore import Slot as pyqtSlot
+from PySide2.QtCore import Signal
+from PySide2.QtCore import Slot
 
 
-class FloatSlider(QSlider):
+class Slider(QSlider):
 
-    floatValueChanged = pyqtSignal(float)
+    signalValueChanged = Signal(float)
 
     def __init__(self, *args, **kwargs):
         QSlider.__init__(self, *args, **kwargs)
-        self._max_int_value = 10**4
+        self._max_int_value = 10 ** 4
         QSlider.setMinimum(self, 0)
         QSlider.setMaximum(self, self._max_int_value)
         self._max_value = 1.0
         self._min_value = 0.0
-        self.valueChanged.connect(self._emitFloatValueChanged)
+        self.valueChanged.connect(self._emit_value_changed)
 
-    @pyqtSlot()
-    def _emitFloatValueChanged(self):
-        self.floatValueChanged.emit(self.value())
+    @Slot()
+    def _emit_value_changed(self):
+        self.signalValueChanged.emit(self.value())
 
     @property
     def _range(self):
@@ -47,6 +53,7 @@ class FloatSlider(QSlider):
 
     def setFactor(self, value):
         self._max_int_value = value
+        super(Slider, self).setMaximum(self._max_int_value)
         self.setValue(self.value())
 
     def getRange(self):
