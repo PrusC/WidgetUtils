@@ -1,16 +1,15 @@
-from FloatSlider import FloatSlider
-from sliderspinbox import SliderSpinBox
-from PySide2.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel
+from WidgetUtils.widgets.slider import Slider
+from WidgetUtils.widgets.sliderspinbox import SliderSpinBox
+from PySide2.QtWidgets import QApplication, QWidget, QVBoxLayout
 from PySide2.QtCore import Qt
 import sys
-
 
 application = QApplication(sys.argv)
 
 w = QWidget()
 w.show()
 lay = QVBoxLayout(w)
-slider = FloatSlider(w)
+slider = Slider(w)
 slider.setOrientation(Qt.Horizontal)
 sliderSpin = SliderSpinBox(w)
 lay.addWidget(slider)

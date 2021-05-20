@@ -8,7 +8,7 @@ from PySide2.QtWidgets import QWidget, QHBoxLayout, QDoubleSpinBox, QLabel
 from PySide2.QtCore import Signal, Slot, Qt
 import sys
 
-from slider import Slider
+from .slider import Slider
 
 
 class SliderSpinBox(QWidget):
