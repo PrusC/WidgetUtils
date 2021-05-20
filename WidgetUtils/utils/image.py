@@ -20,7 +20,7 @@ class Image(object):
         self.colormap = None
         if colormap:
             self.set_colormap(colormap)
-        if im:
+        if im is not None:
             self.set_image(im)
 
     def set_image(self, im):
@@ -47,7 +47,7 @@ class Image(object):
 
     def save_image_with_full_name(self, full_name):
         if full_name.endswith('.csv'):
-            if self.im and isinstance(self.im, numpy.ndarray):
+            if isinstance(self.im, numpy.ndarray):
                 numpy.savetxt(full_name, self.im, fmt="%i", delimiter=";")
         else:
             if self.qim and isinstance(self.qim, QImage):

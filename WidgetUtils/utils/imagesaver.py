@@ -22,7 +22,7 @@ class ImageSaver(QObject):
         self._image = Image(image, colormap=color_table)
 
     def show_save_dialog(self):
-        if self._image.matrix:
+        if self._image.matrix is not None:
             _filter = "Images (*.png *.jpg *.bmp *.jpeg);;Raw images(*.csv);;All files (*.*)"
         else:
             _filter = "Images (*.png *.jpg *.bmp *.jpeg);;All files (*.*)"
