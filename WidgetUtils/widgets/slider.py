@@ -34,8 +34,9 @@ class Slider(QSlider):
         return float(QSlider.value(self)) / self._max_int_value * self._range + self._min_value
 
     def setValue(self, value):
-        float_value = (value - self._min_value) / self._range * self._max_int_value
-        QSlider.setValue(self, int(float_value))
+        if self._range > 0:
+            float_value = (value - self._min_value) / self._range * self._max_int_value
+            QSlider.setValue(self, int(float_value))
 
     def setMinimum(self, value):
         self._min_value = value
