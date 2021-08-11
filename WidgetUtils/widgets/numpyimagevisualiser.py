@@ -44,13 +44,14 @@ class CustomGraphicsView(QGraphicsView):
     
     def __init__(self, parent=None, scene=None, *args, **kwargs):
         super(CustomGraphicsView, self).__init__(parent, *args, **kwargs)
-        if scene and isinstance(scene, ImageVisualiseScene):
-            self._scene = ImageVisualiseScene(self)
-            self.setScene(self._scene)
+        self._scene = None
+        if isinstance(scene, QGraphicsScene):
+            self.setScene(scene)
 
     def update_image(self, im, colormap=None, scaled_size=None, ratio=0x1):
-        self._scene.set_colormap(colormap)
-        self._scene.update_image(im, scaled_size, ratio)
+        if self._scene:
+            self._scene.set_colormap(colormap)
+            self._scene.update_image(im, scaled_size, ratio)
         
     def setScene(self, scene):
         if isinstance(scene, ImageVisualiseScene):
@@ -59,11 +60,14 @@ class CustomGraphicsView(QGraphicsView):
             super(CustomGraphicsView, self).setScene(self._scene)
         else:
             super(CustomGraphicsView, self).setScene(scene)
-        
-    def resizeEvent(self, event):
+
+    def fit(self):
         if self.scene():
             rect = self.scene().itemsBoundingRect()
             self.resetTransform()
             self.fitInView(rect, Qt.KeepAspectRatio)
             self.centerOn(rect.center())
+        
+    def resizeEvent(self, event):
+        self.fit()
         super(CustomGraphicsView, self).resizeEvent(event)    

@@ -28,6 +28,7 @@ class Image(object):
             self.im = im
             self.qim = to_qimage(self.im, self.colormap)
         elif isinstance(im, QImage):
+            self.im = None
             self.qim = im
 
     def set_colormap(self, colormap):
